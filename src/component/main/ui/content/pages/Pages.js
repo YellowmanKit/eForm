@@ -3,13 +3,16 @@ import UI from 'src/component/main/ui/UI';
 import { View } from 'react-native';
 
 import Home from './page/home/Home';
+import Form from './page/form/Form';
 
-class Pages extends UI {
+export default class Pages extends UI {
 
   page(page){
     switch (page) {
       case 'home':
         return <Home app={this.app}/>
+      case 'form':
+        return <Form app={this.app}/>
       default:
         return null;
     }
@@ -17,9 +20,9 @@ class Pages extends UI {
 
   render() {
     this.init(this.props);
-    const style = {...this.scale(1,0.9), ...this.style.list, ...{
+    const style = {...this.scale(1,0.864), ...this.style.list, ...{
       justifyContent: 'center',
-      backgroundColor: 'white'
+      backgroundColor: 'yellow'
     }}
     return (
       <View style={style}>
@@ -28,5 +31,3 @@ class Pages extends UI {
     )
   }
 }
-
-export default Pages;

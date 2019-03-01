@@ -11,7 +11,17 @@ const reducer = (
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        overFlow: 'auto'
+        overflow: 'scroll'
+      },
+      row: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+      },
+      border: {
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: 'grey'
       }
     },
     color: {

@@ -2,21 +2,24 @@ import React from 'react';
 import Component from 'src/component/Component';
 import { Text } from 'react-native';
 
-class Texts extends Component {
+export default class Texts extends Component {
 
   constructor(props){
     super(props);
     this.init(props);
   }
 
-  text(text, color, fontWeight, scale){
+  general(text){ return this.text(text, [0.5,0.05], 0.035, 'black', 'bold', 'center'); }
+
+  text(text, scale, fontScale, color, fontWeight, textAlign){
     const style = {
-      fontSize: scale? this.size[1] * scale[1] * 0.25: this.size[1] * 0.075,
-      fontWeight: fontWeight? fontWeight: 'bold',
-      color: color? color: 'black'
+      width: this.size[0] * scale[0], height: this.size[1] * scale[1],
+      fontSize: this.size[1] * fontScale,
+      fontWeight: fontWeight,
+      color: color,
+      textAlign: textAlign,
+      overflow: 'hidden'
     }; return <Text style={style}>{text}</Text>
   }
 
 }
-
-export default Texts;

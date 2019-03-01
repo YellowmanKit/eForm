@@ -1,9 +1,7 @@
 import UI from 'src/component/main/ui/UI';
 
-class Page extends UI {
+export default class Page extends UI {
 
-  page(){ return {...this.scale(1,0.864), ...this.style.list} }
+  page(){ return {...this.style.list, ...{ backgroundColor: 'white', width: '100%', height: '100%' } } }
 
 }
-
-export default Page;

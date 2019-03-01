@@ -3,8 +3,9 @@ import Component from 'src/component/Component';
 import { Dimensions } from 'react-native';
 
 import Content from './ui/content/Content';
+import Scanner from './tool/Scanner';
 
-class Main extends Component {
+export default class Main extends Component {
 
   constructor(props){
     super(props);
@@ -16,7 +17,9 @@ class Main extends Component {
   view(status){
     switch (status) {
       case 'ready':
-        return <Content app={this.props.app}/>
+        return <Content app={this.app}/>
+      case 'scan':
+        return <Scanner app={this.app}/>
       default:
         return null;
     }
@@ -28,5 +31,3 @@ class Main extends Component {
   }
 
 }
-
-export default Main;

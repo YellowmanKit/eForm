@@ -3,7 +3,7 @@ import Component from 'src/component/Component';
 import { TouchableOpacity } from 'react-native';
 import Texts from './Texts';
 
-class Buttons extends Component {
+export default class Buttons extends Component {
 
   texts = new Texts(this.props);
 
@@ -19,10 +19,8 @@ class Buttons extends Component {
       backgroundColor: color
     }}; return(
     <TouchableOpacity style={style} onPress={onPress}>
-      {this.texts.text(text, 'white', 'bold', scale)}
+      {this.texts.text(text, scale, scale[1] * 0.65, 'white', 'bold', 'center')}
     </TouchableOpacity>)
   }
 
 }
-
-export default Buttons;

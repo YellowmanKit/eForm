@@ -1,5 +1,5 @@
 var data = {
-  update: function (original, newItems, idOnly, append){
+  update: (original, newItems, idOnly, append)=>{
     if(!newItems || newItems.length === 0){ return original; }
 
     var result = original.slice(0);
@@ -18,14 +18,25 @@ var data = {
         }
         if(j === result.length - 1){
           if(append){ result.splice(result.length,0,newItems[i]);
-          }else{ result.splice(0,0,newItems[i]); }
+          }else{ result.splice(0,0,newItems[i]); } break;
         }
       }
     }
-    console.log(result);
+    //console.log(result);
     return result;
   },
-  getIndex: function (data, item){ for(var i=0;i<data.length;i++){ if(data[i]._id === item._id){ return i; } } }
+  remove: (original, item)=>{
+    var result = original.slice(0);
+    for(var i=0;i<result.length;i++){
+      if(result[i]._id === item._id){
+        result.splice(i,1);
+        break;
+      }
+    }
+    //console.log(result);
+    return result;
+  },
+  getIndex: (data, item)=>{ for(var i=0;i<data.length;i++){ if(data[i]._id === item._id){ return i; } } }
 }
 
 module.exports = data;

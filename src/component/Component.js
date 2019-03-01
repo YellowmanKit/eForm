@@ -1,5 +1,5 @@
 import React from 'react';
-class Component extends React.Component {
+export default class Component extends React.Component {
 
   init(props){
     this.app = props.app;
@@ -15,4 +15,3 @@ class Component extends React.Component {
   scale(width, height){ return { width: this.size[0] * width, height: this.size[1] * height } }
 
 }
-export default Component;
