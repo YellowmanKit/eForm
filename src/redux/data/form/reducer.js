@@ -2,10 +2,13 @@ import * as data from '../data';
 
 const reducer = (
   state = {
-    forms: []
+    forms: [],
+    usingForm: {}
   }, action)=>{
   const payload = action.payload;
   switch (action.type) {
+    case 'useForm':
+      return {...state, usingForm: payload};
     case 'updateForms':
       return {...state, forms: data.update(state.forms, payload, false, true)};
     case 'removeForm':

@@ -35,7 +35,7 @@ export default class Nav extends UI {
       <View style={style}>
         {this.buttons.button('<','transparent',[0.1,0.1],()=>{ this.action.content.set('page','home'); })}
         {this.texts.text(this.state.title, [0.75,0.1], 0.075, 'white', 'bold', 'center')}
-        {this.buttons.button('>','transparent',[0.1,0.1],()=>{ this.action.content.set('page','home'); })}
+        {this.buttons.button('+','transparent',[0.1,0.1],()=>{ this.action.main.set('status','scan'); })}
       </View>
     )
   }

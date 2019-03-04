@@ -22,7 +22,7 @@ export default class Pages extends UI {
     this.init(this.props);
     const style = {...this.scale(1,0.864), ...this.style.list, ...{
       justifyContent: 'center',
-      backgroundColor: 'yellow'
+      backgroundColor: 'grey'
     }}
     return (
       <View style={style}>

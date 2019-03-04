@@ -12,7 +12,8 @@ export default class Form extends Row {
       <View style={this.row()}>
         {this.verGap(0.01)}
         {this.title(form.title, [0.625,0.05])}
-        {this.button('FILL','green',()=>{ this.action.content.set('page','form')})}
+        {this.button('FILL','green',()=>{
+          this.action.form.useForm(form); this.action.content.set('page','form')})}
         {this.verGap(0.02)}
         {this.button('DEL','red',()=>{ this.action.form.remove(form); })}
       </View>

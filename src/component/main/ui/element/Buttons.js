@@ -17,7 +17,8 @@ export default class Buttons extends Component {
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: color
-    }}; return(
+    }}
+    return(
     <TouchableOpacity style={style} onPress={onPress}>
       {this.texts.text(text, scale, scale[1] * 0.65, 'white', 'bold', 'center')}
     </TouchableOpacity>)
