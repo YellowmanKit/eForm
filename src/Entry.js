@@ -8,14 +8,16 @@ import * as main from './redux/control/main/action';
 import * as ui from './redux/control/ui/action';
 
 import * as form from './redux/data/form/action';
+import * as submit from './redux/data/submit/action';
 
 class Entry extends React.Component {
 
   render() {
-    return <Main app={{
+    return(
+    <Main app={{
       store: this.props.store,
       action: this.props.action
-    }}/>
+    }}/>)
   }
 
 }
@@ -28,7 +30,8 @@ function mapDispatchToProps(dispatch){
       main: Action(main, dispatch),
       ui: Action(ui, dispatch),
 
-      form: Action(form, dispatch)
+      form: Action(form, dispatch),
+      submit: Action(submit, dispatch)
   }}
 }
 

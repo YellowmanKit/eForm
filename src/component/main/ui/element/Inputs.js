@@ -15,57 +15,50 @@ export default class Inputs extends Component {
     this.init(props);
   }
 
-  string(scale){
+  string(scale, value, onChange){
     const style = {...this.scale(scale[0], scale[1]), ...{
       textAlign: 'center',
       backgroundColor: this.color.lightGrey
     }}
-    return <TextInput style={style}/>
+    return <TextInput style={style} defaultValue={value} onChangeText={onChange}/>
   }
 
-  picker(scale, options, selected){
+  picker(scale, options, selected, onChange){
     const style = {...this.scale(scale[0], scale[1]), ...{
       backgroundColor: this.color.lightGrey
     }}
     return(
-      <Picker style={style} selectedValue={selected}>
+      <Picker style={style} selectedValue={selected} onValueChange={onChange}>
         {options.map((option, i)=>{ return <Picker.Item key={i} label={option} value={option} /> })}
       </Picker>
     )
   }
 
-  date(scale){
+  date(scale, selected, onChange){
     const style = {...this.scale(scale[0], scale[1]), ...{
       backgroundColor: this.color.lightGrey
     }}
     return(
     <DatePicker
       style={style}
-      date={'2019-3-4'}
+      date={selected}
       mode="date"
       placeholder="select date"
       format="YYYY-MM-DD"
       confirmBtnText="Confirm"
       cancelBtnText="Cancel"
       customStyles={{
-        dateIcon: {
-          position: 'absolute',
-          left: 0,
-          top: 4,
-          marginLeft: 0
-        },
-        dateInput: {
-          marginLeft: 36
-        }
+        dateIcon: { position: 'absolute', left: 0, top: 4 },
+        dateInput: { marginLeft: 36 }
       }}
-      onDateChange={(date) => {}}/>)
+      onDateChange={onChange}/>)
   }
 
-  file(scale, type){
+  file(scale, type, selected, onChange){
     return(
-      this.buttons.button('select file', this.color.lightGrey, scale, async ()=>{
+      this.buttons.button(selected? selected.name: 'select file', this.color.lightGrey, scale, async ()=>{
         const result = await DocumentPicker.getDocumentAsync({ type });
-        if (!result.cancelled) { }
+        if (!result.cancelled) { onChange(result); }
       })
     )
   }

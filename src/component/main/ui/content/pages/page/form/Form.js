@@ -4,6 +4,12 @@ import { View, ScrollView } from 'react-native';
 
 export default class Form extends Page {
 
+  constructor(props){
+    super(props);
+    this.init(props);
+    this.state = { submit: this.getSubmit(this.store.form.usingForm._id)  }
+  }
+
   render(){
     this.init(this.props);
     const form = this.store.form.usingForm;
@@ -13,7 +19,7 @@ export default class Form extends Page {
           {this.gap(0.02)}
           {this.texts.general(form.title)}
           {this.sep()}
-          {form.questions.map((question, i)=>{
+          {form.questions && form.questions.map((question, i)=>{
             return this.question(question);
           })}
         </ScrollView>
@@ -33,20 +39,27 @@ export default class Form extends Page {
   }
 
   field(q){
+    const value = this.state.submit[q.qid]? this.state.submit[q.qid].value: '';
     switch (q.type) {
       case 'string':
-        return this.inputs.string([0.67, 0.05])
+        return this.inputs.string([0.67, 0.05], value, (text)=>{ this.onChange(q.qid, text); })
       case 'picker':
-        return this.inputs.picker([0.2, 0.05], q.options, q.options[0])
+        return this.inputs.picker([0.2, 0.05], q.options, value, (value)=>{ this.onChange(q.qid, value); } )
       case 'date':
-        return this.inputs.date([0.67, 0.065])
+        return this.inputs.date([0.67, 0.065], value, (date)=>{ this.onChange(q.qid, date); })
       case 'text':
-        return this.inputs.string([0.67, 0.15])
+        return this.inputs.string([0.67, 0.15], value, (text)=>{ this.onChange(q.qid, text); })
       case 'image':
-        return this.inputs.file([0.67, 0.05], 'image/*')
+        return this.inputs.file([0.67, 0.05], 'image/*', value, (uri)=>{ this.onChange(q.qid, uri); } )
       default:
         return null;
     }
   }
+
+  onChange(qid, value){
+    this.state.submit[qid] = { value }
+    this.action.submit.update([this.state.submit]);
+  }
+
 
 }

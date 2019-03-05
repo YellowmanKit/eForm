@@ -43,7 +43,7 @@ export default class Main extends Component {
       ]
     }]);
 
-    this.action.form.update([
+    /*this.action.form.update([
       {_id: '1', title: 'texting'},
       {_id: '2', title: 'texting'},
       {_id: '3', title: 'texting'},
@@ -62,7 +62,7 @@ export default class Main extends Component {
       {_id: '77', title: 'texting'},
       {_id: '88', title: 'texting'},
       {_id: '99', title: 'texting'},
-    ])
+    ])*/
 
     this.action.ui.set('size', [Dimensions.get('window').width, Dimensions.get('window').height]);
     this.action.main.set('status', 'ready');

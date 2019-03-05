@@ -7,10 +7,11 @@ import main from './control/main/reducer';
 import ui from './control/ui/reducer';
 
 import form from './data/form/reducer';
+import submit from './data/submit/reducer';
 
 const reducer = combineReducers({
   main, ui, content,
-  form
+  form, submit
 });
 
 const error = (store) => (next) => (action) => {

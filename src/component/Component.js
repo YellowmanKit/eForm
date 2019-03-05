@@ -14,4 +14,14 @@ export default class Component extends React.Component {
 
   scale(width, height){ return { width: this.size[0] * width, height: this.size[1] * height } }
 
+  getSubmit(formId){
+    const submits = this.store.submit.submits;
+    for(var i=0;i<submits.length;i++){
+      if(submits[i].form === formId){ return submits[i]; }
+    }
+    const newSubmit = { _id: formId, form: formId }
+    this.action.submit.update([newSubmit]);
+    return newSubmit;
+  }
+
 }
