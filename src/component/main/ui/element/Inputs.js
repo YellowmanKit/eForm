@@ -1,13 +1,15 @@
 import React from 'react';
 import Component from 'src/component/Component';
-import { TextInput, Picker } from 'react-native';
+import { View, TextInput, Picker, Slider } from 'react-native';
 import DatePicker from 'react-native-datepicker';
 import { DocumentPicker } from 'expo';
 
+import Texts from './Texts';
 import Buttons from './Buttons';
 
 export default class Inputs extends Component {
 
+  texts = new Texts(this.props);
   buttons = new Buttons(this.props);
 
   constructor(props){
@@ -15,12 +17,24 @@ export default class Inputs extends Component {
     this.init(props);
   }
 
-  string(scale, value, onChange){
+  slider(scale, value, min, max, onChange){
+    const style = {...this.scale(scale[0], scale[1]), ...this.style.list}
+    return(
+      <View style={style}>
+        {this.texts.small(value)}
+        <Slider style={this.scale(scale[0], scale[1] / 2)} value={value} minimumValue={min} maximumValue={max}
+        step={1} onValueChange={onChange}/>
+      </View>)
+  }
+
+  string(scale, value, onChange, placeholder, multiline){
     const style = {...this.scale(scale[0], scale[1]), ...{
       textAlign: 'center',
       backgroundColor: this.color.lightGrey
     }}
-    return <TextInput style={style} defaultValue={value} onChangeText={onChange}/>
+    return(
+      <TextInput style={style} defaultValue={value} onChangeText={onChange}
+      maxLength={200} multiline={multiline} placeholder={placeholder}/>)
   }
 
   picker(scale, options, selected, onChange){
@@ -56,10 +70,10 @@ export default class Inputs extends Component {
 
   file(scale, type, selected, onChange){
     return(
-      this.buttons.button(selected? selected.name: 'select file', this.color.lightGrey, scale, async ()=>{
+      this.buttons.button('', this.color.lightGrey, scale, async ()=>{
         const result = await DocumentPicker.getDocumentAsync({ type });
         if (!result.cancelled) { onChange(result); }
-      })
+      },{}, selected.uri)
     )
   }
 

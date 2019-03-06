@@ -4,29 +4,27 @@ import { StyleSheet, Text, View } from 'react-native';
 import { BarCodeScanner, Permissions } from 'expo';
 
 export default class Scanner extends UI {
-  state = { hasCameraPermission: null }
+  state = { permission: null }
 
   async componentDidMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
-    this.setState({ hasCameraPermission: status === 'granted' });
+    this.setState({ permission: status === 'granted' });
   }
 
   render() {
     this.init(this.props);
-    const { hasCameraPermission } = this.state;
-
-    if (hasCameraPermission === null) { return <Text>Requesting for camera permission</Text>; }
-    if (hasCameraPermission === false) { return <Text>No access to camera</Text>; }
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{...this.scale(1,1), ...{ backgroundColor: 'black' }}}>
+        {this.state.permission &&
         <BarCodeScanner
-        onBarCodeScanned={this.handleBarCodeScanned}
-        style={StyleSheet.absoluteFill}/>
+        onBarCodeScanned={this.scanned}
+        style={this.scale(1,1)}/>}
+        {this.buttons.absolute('<', 'transparent', [0.15,0.15], ()=>{ this.action.main.set('status','ready'); })}
       </View>
     );
   }
 
-  handleBarCodeScanned = ({ type, data }) => { this.action.form.fetchForm(data); }
+  scanned = ({ type, data }) => { this.action.form.fetchForm(data); }
 
 }

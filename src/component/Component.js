@@ -12,7 +12,12 @@ export default class Component extends React.Component {
     this.color = this.store.ui.color;
   }
 
-  scale(width, height){ return { width: this.size[0] * width, height: this.size[1] * height } }
+  scale(width, height){
+    var style = {};
+    if(width){ style = { width: this.size[0] * width } }
+    if(height){ style = { ...style, ...{ height: this.size[1] * height } } }
+    return style;
+  }
 
   getSubmit(formId){
     const submits = this.store.submit.submits;

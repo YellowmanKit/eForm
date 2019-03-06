@@ -1,6 +1,5 @@
 import React from 'react';
 import { View } from 'react-native';
-
 import Row from './Row';
 
 export default class Form extends Row {

@@ -11,9 +11,7 @@ export default class Forms extends List {
     return (
       <ScrollView contentContainerStyle={this.list()}>
         {this.gap(0.02)}
-        {this.store.form.forms.map(form=>{
-          return <Form key={form._id} form={form} app={this.app}/>
-        })}
+        {this.store.form.forms.map(form=>{ return <Form key={form._id} form={form} app={this.app}/> })}
         {this.gap(0.02)}
       </ScrollView>
     )

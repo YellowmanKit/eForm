@@ -9,7 +9,8 @@ export default class Texts extends Component {
     this.init(props);
   }
 
-  general(text){ return this.text(text, [1,0.05], 0.035, 'black', 'bold', 'center'); }
+  general(text){ return this.text(text, [null, null], 0.035, 'black', 'bold', 'center'); }
+  small(text){ return this.text(text, [null, null], 0.025, 'black', 'normal', 'center'); }
 
   text(text, scale, fontScale, color, fontWeight, textAlign){
     const style = {...this.scale(scale[0], scale[1]), ...{
