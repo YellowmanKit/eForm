@@ -7,6 +7,7 @@ export default class Form extends Row {
   render(){
     this.init(this.props);
     const form = this.props.form;
+    console.log(form);
     return(
       <View style={this.row()}>
         {this.verGap(0.01)}

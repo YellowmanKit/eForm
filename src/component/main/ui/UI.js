@@ -11,8 +11,8 @@ export default class UI extends Component {
   inputs = new Inputs(this.props);
   texts = new Texts(this.props);
 
-  gap(height){ return <View style={{ width: this.size[0], height: this.size[1] * height }}/> }
-  verGap(width){ return <View style={{ width: this.size[0] * width, height: this.size[1] }}/> }
+  gap(height){ return <View style={{ width: '100%', height: this.size[1] * height }}/> }
+  verGap(width){ return <View style={{ width: this.size[0] * width, height: '100%' }}/> }
   sep(){ return <View style={{ width: this.size[0], height: 1, backgroundColor: 'grey' }}/> }
 
 }

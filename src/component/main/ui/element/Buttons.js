@@ -15,7 +15,7 @@ export default class Buttons extends Component {
   absolute(text, color, scale, onPress){
     return this.button(text, color, scale, onPress, { position: 'absolute', top: 0, left: 0})
   }
-
+  
   button(text, color, scale, onPress, custom, image){
     const style = {...this.scale(scale[0],scale[1]), ...this.style.list, ...custom, ...{
       alignItems: 'center',

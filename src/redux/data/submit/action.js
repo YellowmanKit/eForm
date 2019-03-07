@@ -1,10 +1,10 @@
 export const set = (type, payload) =>{ return { type, payload } }
 export const update = (payload) =>{ return { type: 'updateSubmits', payload } }
 
-export const submit = (submit) => {
+export const submit = (form, submit) => {
   console.log(submit);
-  return async dispatch =>{
-    dispatch({type: 'updateSubmits', payload: [submit] });
+  return async (dispatch) => {
+
     dispatch({type: 'status', payload: 'ready' });
   }
 }

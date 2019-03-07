@@ -6,6 +6,30 @@ import Form from './row/Form';
 
 export default class Forms extends List {
 
+  constructor(props){
+    super(props);
+    this.init(props);
+    this.loadForms();
+    this.loadSubmits();
+  }
+
+  async loadForms(){
+    const forms = await this.app.load('forms');
+    this.action.form.update(JSON.parse(forms));
+  }
+
+  async loadSubmits(){
+    const submits = await this.app.load('submits');
+    this.action.submit.update(JSON.parse(submits));
+  }
+
+  componentWillReceiveProps(newProps){
+    const newForms = newProps.app.store.form.forms;
+    if(this.store.form.forms.length !== newForms.length){ this.saveForms(newForms); }
+  }
+
+  saveForms(forms){ this.app.save('forms', JSON.stringify(forms)); }
+
   render(){
     this.init(this.props);
     return (

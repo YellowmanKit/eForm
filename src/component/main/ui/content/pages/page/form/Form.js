@@ -2,6 +2,7 @@ import React from 'react';
 import Page from '../Page';
 import { View, ScrollView } from 'react-native';
 import CheckBoxes from 'src/component/main/ui/item/list/CheckBoxes';
+import Map from 'src/component/main/ui/item/Map';
 
 export default class Form extends Page {
 
@@ -14,13 +15,14 @@ export default class Form extends Page {
   render(){
     this.init(this.props);
     const form = this.store.form.usingForm;
+    //console.log(form);
     return (
       <View style={this.page()}>
         <ScrollView contentContainerStyle={this.style.list}>
           {this.gap(0.02)}
           {this.texts.general(form.title)}
           {this.sep()}
-          {form.form && form.form.map((q, i)=>{ return this.question(q); })}
+          {form.body && form.body.map((q, i)=>{ return this.question(q); })}
           {this.gap(0.25)}
         </ScrollView>
       </View>
@@ -28,6 +30,7 @@ export default class Form extends Page {
   }
 
   question(q){
+    //console.log(q);
     return(
       <View key={q.id} style={this.style.list}>
         {this.texts.small(q.caption)}
@@ -56,7 +59,7 @@ export default class Form extends Page {
       case 'display_image':
         return this.buttons.button('', this.color.lightGrey, [0.67, 0.33], ()=>{}, {}, q.url)
       case 'map':
-        return null;
+        return <Map app={this.app} markers={q.markers} caption={q.marker_caption}/>
       case 'upload':
         return this.inputs.file([0.67, 0.33], 'image/*', value, (uri)=>{ this.onChange(q.id, uri); } )
       case 'slider':

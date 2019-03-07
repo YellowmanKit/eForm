@@ -25,6 +25,6 @@ export default class Scanner extends UI {
     );
   }
 
-  scanned = ({ type, data }) => { this.action.form.fetchForm(data); }
+  scanned = ({ type, data }) => { this.action.main.set('status','ready'); this.action.form.fetchForm(data); }
 
 }
