@@ -11,9 +11,7 @@ export default class Nav extends UI {
     var title = '';
     var text = ['<','+']
     var onPress = [()=>{ this.action.content.set('page','home'); }, ()=>{ this.action.main.set('status','scan'); } ];
-
     const form = this.store.form.usingForm;
-
     switch (page) {
       case 'home':
         title = 'eForm';
@@ -22,7 +20,7 @@ export default class Nav extends UI {
       case 'form':
         title = 'FILL'
         text[1] = '^';
-        onPress[1] = ()=>{ this.action.submit.submit(form, this.getSubmit(form._id)); }
+        onPress[1] = ()=>{ this.submitForm(); }
         break;
       default:
         break;
@@ -42,14 +40,15 @@ export default class Nav extends UI {
     )
   }
 
-  onLeft(){
-    this.app.save('submits', JSON.stringify(this.store.submit.submits));
-    this.state.onPress[0]();
-  }
+  onLeft(){ this.saveSubmits(); this.state.onPress[0](); }
+  onRight(){ this.saveSubmits(); this.state.onPress[1](); }
+  saveSubmits(){ if(this.store.content.page === 'form'){ this.app.save('submits', JSON.stringify(this.store.submit.submits)); } }
 
-  onRight(){
-    this.app.save('submits', JSON.stringify(this.store.submit.submits));
-    this.state.onPress[1]();
+  submitForm(){
+    navigator.geolocation.getCurrentPosition(position=>{
+      const form = this.store.form.usingForm;
+      this.action.submit.submit(form, this.getSubmitByFormId(form._id), position.coords, this.store.main.user.jwt);
+    });
   }
 
 }

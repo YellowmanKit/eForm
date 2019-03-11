@@ -15,8 +15,8 @@ export default class Buttons extends Component {
   absolute(text, color, scale, onPress){
     return this.button(text, color, scale, onPress, { position: 'absolute', top: 0, left: 0})
   }
-  
-  button(text, color, scale, onPress, custom, image){
+
+  button(text, color, scale, onPress, custom, uri){
     const style = {...this.scale(scale[0],scale[1]), ...this.style.list, ...custom, ...{
       alignItems: 'center',
       justifyContent: 'center',
@@ -25,7 +25,7 @@ export default class Buttons extends Component {
     return(
     <TouchableOpacity style={style} onPress={onPress}>
       {text !== '' && this.texts.text(text, scale, scale[1] * 0.65, 'white', 'bold', 'center')}
-      {image && <Image source={{ uri: image }} style={this.scale(scale[0],scale[1])}/>}
+      {uri && <Image source={{ uri }} style={this.scale(scale[0],scale[1])}/>}
     </TouchableOpacity>)
   }
 

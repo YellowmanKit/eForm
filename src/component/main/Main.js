@@ -13,6 +13,7 @@ export default class Main extends Component {
     this.init(props);
     this.action.ui.set('size', [Dimensions.get('window').width, Dimensions.get('window').height]);
     this.action.main.set('status', 'login');
+    //AsyncStorage.removeItem('submits');
   }
 
   view(status){

@@ -19,14 +19,28 @@ export default class Component extends React.Component {
     return style;
   }
 
-  getSubmit(formId){
+  getSubmitByFormId(formId){
     const submits = this.store.submit.submits;
     for(var i=0;i<submits.length;i++){
       if(submits[i].form === formId){ return submits[i]; }
     }
     const newSubmit = { _id: formId, form: formId }
+
+    const form = this.getItem(this.store.form.forms, formId);
+    //console.log(form);
+    const questions = form.definition.questions;
+    for(var i=0;i<questions.length;i++){
+      var value = '';
+      if(questions[i].type === 'slider'){ value = questions[i].minimum; }
+      if(questions[i].type === 'checkbox'){ value = questions[i].default_value; }
+      newSubmit[questions[i].id] = { value };
+    }
+
     this.action.submit.update([newSubmit]);
+    //console.log(newSubmit);
     return newSubmit;
   }
+
+  getItem(data, id){ for(var i=0;i<data.length;i++){ if(data[i]._id === id){ return data[i]; } } return null; }
 
 }

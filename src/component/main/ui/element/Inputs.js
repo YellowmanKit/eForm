@@ -68,12 +68,12 @@ export default class Inputs extends Component {
       onDateChange={onChange}/>)
   }
 
-  file(scale, type, selected, onChange){
+  file(scale, type, value, onChange){
     return(
       this.buttons.button('', this.color.lightGrey, scale, async ()=>{
         const result = await DocumentPicker.getDocumentAsync({ type });
         if (!result.cancelled) { onChange(result); }
-      },{}, selected.uri)
+      },{}, value? value.uri: null)
     )
   }
 

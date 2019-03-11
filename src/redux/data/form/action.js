@@ -9,17 +9,22 @@ export const useForm = (payload) =>{ return { type: 'useForm', payload } }
 export const fetchForm = (url) => {
   //console.log(url);
   return async (dispatch) => {
-    var res, err;
     redux.loading(dispatch);
 
+    var res, err;
     [err, res] = await to(fetch(url));
     if(err){ redux.error(dispatch); return; }
 
     var result = await res.json();
     console.log(result);
-    const form = result.data;
-    form._id = result.form_name;
+    var form = result.data;
 
+    redux.rename(form, 'id', '_id');
+    redux.rename(form, 'form_definition', 'definition');
+    redux.rename(form, 'form_name', 'name');
+    redux.rename(form['definition'], 'body', 'questions');
+
+    //console.log(form);
     redux.close(dispatch);
     dispatch({type: 'updateForms', payload: [form] });
   }

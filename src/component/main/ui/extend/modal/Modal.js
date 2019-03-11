@@ -16,7 +16,7 @@ export default class Modal extends Extend {
   }
 
   board(modal){
-    const style = {...this.style.list, ...{ backgroundColor: 'rgba(255,255,255,0.5)', padding: this.size[0] * 0.04 }}
+    const style = {...this.style.list, ...{ backgroundColor: 'rgba(255,255,255,0.75)', padding: this.size[0] * 0.04 }}
     return (
       <View style={style}>
         {this.texts.general(modal.message)}
