@@ -1,7 +1,7 @@
 const reducer = (
   state = {
     page: 'home',
-    modal: { status: 'off', message: '', onConfirm: ()=>{} }
+    modal: { status: 'off', message: '', buttons: [{ caption:'', onPress: ()=>{} }] }
   }, action)=>{
   const payload = action.payload;
   switch (action.type) {

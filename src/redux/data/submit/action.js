@@ -20,7 +20,7 @@ export const submit = (form, submit, location, jwt) => {
     if(err){ redux.error(dispatch); return; }
 
     var result = await res.json();
-    //console.log(result);
+    console.log(result);
 
     if(result.errno === 0){
       redux.message(dispatch, 'Form submitted!');

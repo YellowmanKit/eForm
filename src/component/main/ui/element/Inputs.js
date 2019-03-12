@@ -2,7 +2,6 @@ import React from 'react';
 import Component from 'src/component/Component';
 import { View, TextInput, Picker, Slider } from 'react-native';
 import DatePicker from 'react-native-datepicker';
-import { DocumentPicker } from 'expo';
 
 import Texts from './Texts';
 import Buttons from './Buttons';
@@ -71,9 +70,9 @@ export default class Inputs extends Component {
   file(scale, type, value, onChange){
     return(
       this.buttons.button('', this.color.lightGrey, scale, async ()=>{
-        const result = await DocumentPicker.getDocumentAsync({ type });
+        const result = await this.getFile(type);
         if (!result.cancelled) { onChange(result); }
-      },{}, value? value.uri: null)
+      },{}, value.uri? value.uri: null)
     )
   }
 

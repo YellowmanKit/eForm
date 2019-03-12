@@ -1,4 +1,7 @@
 import React from 'react';
+import { DocumentPicker, ImagePicker } from 'expo';
+import JsQR from 'jsqr';
+
 export default class Component extends React.Component {
 
   init(props){
@@ -17,6 +20,37 @@ export default class Component extends React.Component {
     if(width){ style = { width: this.size[0] * width } }
     if(height){ style = { ...style, ...{ height: this.size[1] * height } } }
     return style;
+  }
+
+  async getFile(type){ const result = await DocumentPicker.getDocumentAsync({ type }); return result; }
+  async getImage(){ const result = await ImagePicker.launchImageLibraryAsync({ base64: true, allowsEditing: false }); return result; }
+  imageToQR(image){
+    //console.log(image);
+    try{
+      var Uint8ClampedArray = require('typedarray').Uint8ClampedArray;
+      const Buffer = require('buffer').Buffer;
+      global.Buffer = Buffer;
+      const jpeg = require('jpeg-js');
+
+      const jpegData = Buffer.from(image.base64, 'base64');
+      var rawImageData = jpeg.decode(jpegData);
+      //var uint8Array = jpeg.decode(jpegData, true);
+
+      console.log(rawImageData.data.length);
+      var clampedArray = new Uint8ClampedArray(rawImageData.data.length);
+
+      var i;
+      for (i = 0; i < rawImageData.data.length; i++) {
+        clampedArray[i] = rawImageData.data[i];
+      }
+
+      const code = JsQR(clampedArray, rawImageData.width, rawImageData.height);
+      //const code = JsQR(uint8Array, uint8Array.width, uint8Array.height);
+
+      console.log(code);
+    }catch(err){
+      console.log(err);
+    }
   }
 
   getSubmitByFormId(formId){

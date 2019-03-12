@@ -16,7 +16,7 @@ export default class Form extends Page {
     this.init(this.props);
     const form = this.store.form.usingForm;
     const definition = form.definition;
-    //console.log(form);
+    console.log(form);
     return (
       <View style={this.page()}>
         <ScrollView contentContainerStyle={this.style.list}>

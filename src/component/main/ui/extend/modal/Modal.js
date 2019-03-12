@@ -27,16 +27,19 @@ export default class Modal extends Extend {
   }
 
   buttonArea(modal){
-    const style = {...this.style.row, ...{}}
+    const style = {...this.style.row, ...{ justifyContent: 'space-between' }};
+    const confirm = modal.status === 'confirm';
+    const buttonColors = ['green','blue'];
     return (
       <View style={style}>
-        {modal.status === 'confirm' && this.button('CONFIRM','green', modal.onConfirm)}
-        {modal.status === 'confirm' && this.verGap(0.05)}
-        {this.button(modal.status === 'confirm'?'CANCEL':'CLOSE','red',()=>{ this.action.content.modal('off'); })}
+        {confirm && modal.buttons.map((button, i)=>{
+          return this.button(button.caption, buttonColors[i], ()=>{ this.action.content.modal('off'); button.onPress(); } );
+        })}
+        {this.button(confirm?'CANCEL':'CLOSE','red',()=>{ this.action.content.modal('off'); })}
       </View>
     )
   }
 
-  button(text, color, onPress){ return this.buttons.button(text, color, [0.225,0.035], onPress) }
+  button(text, color, onPress){ return this.buttons.button(text, color, [0.225,0.035], onPress, { margin: this.size[0] * 0.02 }) }
 
 }

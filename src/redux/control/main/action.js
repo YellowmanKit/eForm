@@ -5,6 +5,7 @@ export const set = (type, payload) =>{ return { type, payload } }
 
 export const login = (id, pw) => {
   return async (dispatch) => {
+    //redux.error(dispatch); return;
     if(!id || !pw){ redux.message(dispatch, 'Please enter user id and password correctly!'); return; }
     //id:Chung
     //pw:Jeffrey

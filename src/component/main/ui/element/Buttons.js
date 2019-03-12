@@ -23,7 +23,7 @@ export default class Buttons extends Component {
       backgroundColor: color
     }}
     return(
-    <TouchableOpacity style={style} onPress={onPress}>
+    <TouchableOpacity key={text} style={style} onPress={onPress}>
       {text !== '' && this.texts.text(text, scale, scale[1] * 0.65, 'white', 'bold', 'center')}
       {uri && <Image source={{ uri }} style={this.scale(scale[0],scale[1])}/>}
     </TouchableOpacity>)

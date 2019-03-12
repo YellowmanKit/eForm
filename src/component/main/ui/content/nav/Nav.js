@@ -10,12 +10,12 @@ export default class Nav extends UI {
   nav(page){
     var title = '';
     var text = ['<','+']
-    var onPress = [()=>{ this.action.content.set('page','home'); }, ()=>{ this.action.main.set('status','scan'); } ];
+    var onPress = [()=>{ this.action.content.set('page','home'); }, ()=>{ this.getForm(); } ];
     const form = this.store.form.usingForm;
     switch (page) {
       case 'home':
         title = 'eForm';
-        onPress[0] = ()=>{ this.action.main.set('status','login'); }
+        onPress[0] = ()=>{ this.logout(); }
         break;
       case 'form':
         title = 'FILL'
@@ -43,6 +43,27 @@ export default class Nav extends UI {
   onLeft(){ this.saveSubmits(); this.state.onPress[0](); }
   onRight(){ this.saveSubmits(); this.state.onPress[1](); }
   saveSubmits(){ if(this.store.content.page === 'form'){ this.app.save('submits', JSON.stringify(this.store.submit.submits)); } }
+
+  logout(){
+    this.action.content.set('modal', { status: 'confirm', message: 'Logout?',
+    buttons: [{
+      caption: 'CONFIRM',
+      onPress: ()=>{ this.action.main.set('status', 'login'); }
+    }]})
+  }
+
+  getForm(){
+    this.action.content.set('modal', { status: 'confirm', message: 'Select a method:',
+    buttons: [{
+      caption: 'SCAN QR',
+      onPress: ()=>{ this.action.main.set('status', 'scan'); }
+    },{
+      caption: 'LOAD QR',
+      onPress: async ()=>{
+        const image = await this.getImage();
+        if (image.base64) { this.imageToQR(image); } }
+    }]})
+  }
 
   submitForm(){
     navigator.geolocation.getCurrentPosition(position=>{
